@@ -58,12 +58,20 @@ The adapter from epoch 6 was saved as the final adapter.
 
 Decoding used greedy generation with `max_new_tokens=768`. The Gemma `<end_of_turn>` token was included as a stopping token.
 
-| Model | Mean reward | Valid XML score | Structure score | Palette score | Prompt alignment |
-|---|---:|---:|---:|---:|---:|
-| Base Gemma 3 270M | 0.0937 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| LoRA adapter | 0.3300 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| Model | Mean reward | Strict valid-XML components | Malformed-SVG partial credit | Main interpretation |
+|---|---:|---:|---:|---|
+| Base Gemma 3 270M | 0.0937 | 0.0000 | 0.0937 | Mostly prose or malformed SVG-like text |
+| LoRA adapter | 0.3300 | 0.0000 | 0.3300 | Much more SVG-like, but still usually not closed/parseable |
 
 Delta mean reward: `+0.2363`.
+
+The strict component columns in `results.json` are zero because those components
+are only computed after XML parsing succeeds. In this run, neither the base model
+nor the LoRA model reliably produced parseable XML. The nonzero mean reward comes
+from the capped malformed-SVG partial-credit branch in `reward.py`, which gives
+low credit for outputs that at least contain a plausible SVG start, correct
+namespace, viewBox, shape tags, and colors. This is why the LoRA model improves
+in mean reward while the strict valid-XML components remain zero.
 
 ## Qualitative Findings
 
