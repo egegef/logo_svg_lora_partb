@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+
+gemma3-270m/
+logo-detailed-prompt/
+checkpoints/
+outputs/
+runs/
+wandb/
+
+*.log
+*.tmp
