@@ -11,7 +11,8 @@
       "mean_geometry": 0.0,
       "mean_palette": 0.0,
       "mean_prompt_alignment": 0.0,
-      "mean_penalties": 0.75
+      "mean_penalties": 0.75,
+      "mean_malformed_partial_credit": 0.09372549019607845
     },
     "items": [
       {
@@ -29,7 +30,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 2,
@@ -46,7 +48,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 3,
@@ -63,7 +66,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.15000000000000002
       },
       {
         "idx": 4,
@@ -80,7 +84,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 5,
@@ -97,7 +102,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 6,
@@ -114,7 +120,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 7,
@@ -131,7 +138,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 8,
@@ -148,7 +156,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 9,
@@ -165,7 +174,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 10,
@@ -182,7 +192,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       },
       {
         "idx": 11,
@@ -199,7 +210,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 12,
@@ -216,7 +228,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.16333333333333336
       },
       {
         "idx": 13,
@@ -233,7 +246,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 14,
@@ -250,7 +264,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 15,
@@ -267,7 +282,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.11000000000000003
       },
       {
         "idx": 16,
@@ -284,7 +300,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.020000000000000004
       },
       {
         "idx": 17,
@@ -301,7 +318,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.07000000000000002
       }
     ]
   },
@@ -314,7 +332,8 @@
       "mean_geometry": 0.0,
       "mean_palette": 0.0,
       "mean_prompt_alignment": 0.0,
-      "mean_penalties": 0.75
+      "mean_penalties": 0.75,
+      "mean_malformed_partial_credit": 0.33
     },
     "items": [
       {
@@ -332,7 +351,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 2,
@@ -349,7 +369,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 3,
@@ -366,7 +387,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 4,
@@ -383,7 +405,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 5,
@@ -400,7 +423,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 6,
@@ -417,7 +441,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 7,
@@ -434,7 +459,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 8,
@@ -451,7 +477,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 9,
@@ -468,7 +495,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 10,
@@ -485,7 +513,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 11,
@@ -502,7 +531,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 12,
@@ -519,7 +549,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 13,
@@ -536,7 +567,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 14,
@@ -553,7 +585,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 15,
@@ -570,7 +603,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 16,
@@ -587,7 +621,8 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       },
       {
         "idx": 17,
@@ -604,9 +639,11 @@
         "notes": [
           "xml parse error",
           "partial malformed-svg credit"
-        ]
+        ],
+        "malformed_partial_credit": 0.33
       }
     ]
   },
-  "delta_mean_score": 0.23627450980392156
+  "delta_mean_score": 0.23627450980392156,
+  "score_explanation": "mean_score is the main self-evaluation reward. Strict component scores such as validity/structure/geometry/palette remain 0 when XML parsing fails. malformed_partial_credit records the capped partial credit for SVG-like but non-parseable outputs."
 }
