@@ -21,9 +21,15 @@ I added low partial credit for malformed SVGs that still contain a plausible SVG
 
 Model: `google/gemma-3-270m-it`, downloaded from ModelScope.
 
-Training data: `logo-detailed-prompt/train.jsonl`, 219 examples.
+Source training data: `logo-detailed-prompt/train.jsonl`, 219 examples.
 
-Validation data: `logo-detailed-prompt/valid.jsonl`, 17 examples.
+Source validation data: `logo-detailed-prompt/valid.jsonl`, 17 examples.
+
+Final training data: `closure_data/train_closure.jsonl`, generated from the source prompts by `student_kit/make_closure_dataset.py`.
+
+Final validation data: `closure_data/valid_closure.jsonl`, generated the same way.
+
+I first trained on the original Sonnet SVG targets. That improved SVG-like structure but still failed XML parsing because the small model often did not close long SVG documents. I then used a closure curriculum: short, valid SVG targets that preserve prompt colors and simple shape concepts while strongly teaching `</svg>` completion. The submitted adapter is from this second training run.
 
 LoRA config:
 
@@ -32,46 +38,44 @@ LoRA config:
 | Rank | 8 |
 | Alpha | 16 |
 | Dropout | 0.05 |
-| Learning rate | 1e-4 |
-| Epochs | 6 |
+| Learning rate | 2e-4 |
+| Epochs | 8 |
 | Batch size | 1 |
 | Gradient accumulation | 8 |
-| Max length | 4096 |
-| Seed | 42 |
+| Max length | 1024 |
+| Seed | 43 |
 
 Training used the original chat template and masked the prompt tokens so loss was computed only on the assistant SVG portion.
 
 ## Training Loss
 
+The logged checkpoint summaries visible during training were:
+
 | Epoch | Train loss | Validation loss |
 |---:|---:|---:|
-| 1 | 1.3430 | 1.0033 |
-| 2 | 0.8929 | 0.8437 |
-| 3 | 0.7942 | 0.7905 |
-| 4 | 0.7530 | 0.7689 |
-| 5 | 0.7338 | 0.7603 |
-| 6 | 0.7275 | 0.7592 |
+| 1 | 1.0906 | 0.4030 |
+| 3 | 0.0306 | 0.0223 |
+| 4 | 0.0173 | 0.0182 |
+| 5 | 0.0132 | 0.0185 |
+| 6 | 0.0117 | 0.0159 |
+| 8 | 0.0098 | 0.0155 |
 
-The adapter from epoch 6 was saved as the final adapter.
+The adapter from epoch 8 was saved as the final adapter.
 
 ## Self-Evaluation
 
 Decoding used greedy generation with `max_new_tokens=768`. The Gemma `<end_of_turn>` token was included as a stopping token.
 
-| Model | Mean reward | Strict valid-XML components | Malformed-SVG partial credit | Main interpretation |
-|---|---:|---:|---:|---|
-| Base Gemma 3 270M | 0.0937 | 0.0000 | 0.0937 | Mostly prose or malformed SVG-like text |
-| LoRA adapter | 0.3300 | 0.0000 | 0.3300 | Much more SVG-like, but still usually not closed/parseable |
+| Model | Mean reward | Validity | Structure | Geometry | Palette | Prompt alignment | Penalty |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Base Gemma 3 270M | 0.0937 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.7500 |
+| LoRA adapter | 0.8869 | 1.0000 | 0.9592 | 1.0000 | 1.0000 | 0.4213 | 0.0000 |
 
-Delta mean reward: `+0.2363`.
+Delta mean reward: `+0.7931`.
 
-The strict component columns in `results.json` are zero because those components
-are only computed after XML parsing succeeds. In this run, neither the base model
-nor the LoRA model reliably produced parseable XML. The nonzero mean reward comes
-from the capped malformed-SVG partial-credit branch in `reward.py`, which gives
-low credit for outputs that at least contain a plausible SVG start, correct
-namespace, viewBox, shape tags, and colors. This is why the LoRA model improves
-in mean reward while the strict valid-XML components remain zero.
+The submitted LoRA adapter now receives strict XML/SVG component credit. Unlike
+the first original-target run, the final closure-curriculum run produced
+parseable, closed SVGs on all 17 validation examples.
 
 ## Qualitative Findings
 
@@ -81,21 +85,21 @@ The base model often produced malformed SVG-like text with the wrong namespace, 
 <svg xmlns="http://www.w3.org/svg" viewBox="0 0 256 256" fill="none" ...
 ```
 
-The LoRA model usually started with the correct SVG namespace and viewBox, and generated recognizable SVG components such as gradients, circles, strokes, and colors:
+The final LoRA model reliably starts with the correct SVG namespace and viewBox, uses valid SVG elements, and closes the document:
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>...
 ```
 
-However, the LoRA outputs still usually failed XML parsing because they did not close the SVG cleanly before the generation limit. This is the main remaining failure.
+The closure curriculum makes the outputs simpler than the original Sonnet targets, so the main remaining weakness is visual richness and fine prompt fidelity rather than validity.
 
 ## Analysis
 
-The training loss and validation loss both improved, and the reward shows a clear relative gain over the base model. The improvement is mostly structural: the LoRA model learned the expected SVG opening pattern, namespace, viewBox, and common logo elements.
+The training loss and validation loss both improved, and the reward shows a clear relative gain over the base model. The improvement is now not only structural: the model learned to produce complete, parseable SVG documents.
 
-The result is still weak in absolute terms. The valid XML score stayed at zero for both models, so the adapter did not yet solve the most important requirement: producing a complete closed SVG document. This is a Goodhart risk for my reward: the model can receive partial malformed-SVG credit without producing a valid final logo. I capped malformed-output credit to keep this visible.
+The strongest result is validity: the LoRA model reaches `1.0000` validity, geometry, and palette on the self-evaluation set. Prompt alignment is lower (`0.4213`) because the generated curriculum intentionally uses compact template-like SVGs, so it does not capture every detailed style instruction.
 
-The next experiment should focus on shorter, closed SVG targets or an explicit closing-SVG curriculum. Another useful change would be to train/evaluate with stronger stopping behavior and examples that teach `</svg><end_of_turn>` more reliably.
+The tradeoff is deliberate. For this small model, shorter closed SVGs satisfy the most important technical requirement better than long Sonnet-like targets. A next experiment could mix the closure curriculum with a small number of richer original SVGs after the model has learned to stop correctly.
 
 ## Reproducibility
 
@@ -108,3 +112,4 @@ The submitted repository contains:
 - `results.json`
 - `student_kit/train_lora_peft.py`
 - `student_kit/eval_self.py`
+- `student_kit/make_closure_dataset.py`
